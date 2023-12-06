@@ -14,6 +14,8 @@ RUN npm install
 # Copy the frontend source code to the container
 COPY . .
 
+ENV NODE_OPTIONS="--max_old_space_size=4096"
+
 # Build the frontend application
 RUN npm run build
 
