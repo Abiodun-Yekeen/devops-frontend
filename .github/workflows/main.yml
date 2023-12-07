@@ -41,6 +41,13 @@ jobs:
       - name: Create deployment package
         run: zip -r deploy.zip ./build  # Pack only the build folder into deploy.zip
 
+      - name: Archive debug logs
+        if: always() # Ensure this step runs even if previous steps fail
+        uses: actions/upload-artifact@v2
+        with:
+          name: debug-logs
+          path: /home/runner/.npm/_logs # Replace with the actual path to your logs
+
       # - name: Generate deployment package
       #   run: zip -r deploy.zip . -x '*.git*'
 
