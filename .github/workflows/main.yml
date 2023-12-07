@@ -39,7 +39,7 @@ jobs:
       #     npm run build  # Assuming this command generates the build folder
 
       - name: Create deployment package
-        run: zip -r deploy.zip ./build  # Pack only the build folder into deploy.zip
+        run: zip -r deploy-frontend.zip   # Pack only the build folder into deploy.zip
 
       - name: Archive debug logs
         if: always() # Ensure this step runs even if previous steps fail
@@ -62,4 +62,4 @@ jobs:
          region: eu-north-1
          #use_existing_version_if_available: t
           # Use the image from the registry or directly if not using a registry
-         deployment_package: deploy.zip
+         deployment_package: deploy-frontend.zip
