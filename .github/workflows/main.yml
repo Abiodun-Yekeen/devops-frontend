@@ -33,8 +33,16 @@ jobs:
          
           docker push $IMAGE_NAME
 
-      - name: Generate deployment package
-        run: zip -r deploy.zip . -x '*.git*'
+      - name: Install dependencies and build
+        run: |
+          npm install
+          npm run build  # Assuming this command generates the build folder
+
+      - name: Create deployment package
+        run: zip -r deploy.zip ./build  # Pack only the build folder into deploy.zip
+
+      # - name: Generate deployment package
+      #   run: zip -r deploy.zip . -x '*.git*'
 
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v14
@@ -45,6 +53,6 @@ jobs:
          environment_name: Frontend-env  
          version_label: "v${{ github.run_number }}"
          region: eu-north-1
-         #use_existing_version_if_available: true
+         #use_existing_version_if_available: t
           # Use the image from the registry or directly if not using a registry
          deployment_package: deploy.zip
