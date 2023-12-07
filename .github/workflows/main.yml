@@ -45,5 +45,6 @@ jobs:
          environment_name: Fontend-env  
          version_label: "v${{ github.run_number }}"
          region: eu-north-1
+         use_existing_version_if_available: true
           # Use the image from the registry or directly if not using a registry
          deployment_package: deploy.zip
