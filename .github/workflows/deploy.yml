@@ -28,7 +28,7 @@ jobs:
         with: 
           context: .
           push: true
-          tag: tar1q87/webapp:${{github.sha}}
+          tag: ${{ secrets.DOCKER_USERNAME }}/webapp:${{github.sha}}
 
       - name: Deploy to EC2 instance
         uses: appleboy/ssh-action@master
