@@ -24,7 +24,7 @@ COPY . .
 
 
 # Use Nginx as the web server
-FROM nginx
+# FROM nginx
 
 # Copy the built files from the previous stage to Nginx
 COPY --from=build /app/build /usr/share/nginx/html
