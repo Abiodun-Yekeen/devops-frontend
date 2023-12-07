@@ -41,10 +41,10 @@ jobs:
            docker pull ${{ secrets.DOCKER_USERNAME }}/webapp:${{ github.sha }} 
            docker run -d --name webapp -p 80:80 ${{ secrets.DOCKER_USERNAME }}/webapp:${{ github.sha }} 
 
-        
+           
       - name: Archive debug logs
         if: always() # Ensure this step runs even if previous steps fail
         uses: actions/upload-artifact@v2
         with:
                 name: debug-logs
-                path: / # Replace with the actual path to your logs
+                path: / # Replace with the actual path to your logs 
