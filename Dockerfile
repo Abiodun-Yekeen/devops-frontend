@@ -9,12 +9,12 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install the application dependencies
-RUN npm install
+#RUN npm install
+RUN NODE_ENV=development npm i
 
 # Copy the frontend source code to the container
 COPY . .
 
-ENV NODE_OPTIONS="--max_old_space_size=4096"
 
 # Build the frontend application
 RUN npm run build
@@ -26,7 +26,7 @@ FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
 
 # Expose the port the app runs on (usually 80)
-EXPOSE 80
+EXPOSE 8080
 
 # Default command to start Nginx
 CMD ["nginx", "-g", "daemon off;"]
