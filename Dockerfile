@@ -20,7 +20,7 @@ COPY . .
 RUN npm run build
 
 # Use Nginx as the web server
-FROM nginx:latest
+FROM nginx
 
 # Copy the built files from the previous stage to Nginx
 COPY --from=build /usr/src/frontend/build /usr/share/nginx/html
