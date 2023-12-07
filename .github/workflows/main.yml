@@ -20,36 +20,30 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'  # Adjust as needed
-      - name: Login to Docker Hub
-        run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u abbeylink --password-stdin
 
-      - name: Build and push Docker image to Docker Hub
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
-          IMAGE_NAME: abbeylink/frontend:1.0
-        run: |
-          docker build -t $IMAGE_NAME .
+      # - name: Login to Docker Hub
+      #   run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u abbeylink --password-stdin
+
+      # - name: Build and push Docker image to Docker Hub
+      #   env:
+      #     DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      #     DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
+      #     IMAGE_NAME: abbeylink/frontend:1.0
+      #   run: |
+      #     docker build -t $IMAGE_NAME .
          
-          docker push $IMAGE_NAME
+      #     docker push $IMAGE_NAME
 
       # - name: Install dependencies and build
       #   run: |
       #     npm install
       #     npm run build  # Assuming this command generates the build folder
 
-      - name: Create deployment package
-        run: zip -r deploy-frontend.zip   # Pack only the build folder into deploy.zip
+      
 
-      - name: Archive debug logs
-        if: always() # Ensure this step runs even if previous steps fail
-        uses: actions/upload-artifact@v2
-        with:
-          name: debug-logs
-          path: /home/runner/.npm/_logs # Replace with the actual path to your logs
-
-      # - name: Generate deployment package
-      #   run: zip -r deploy.zip . -x '*.git*'
+     
+      - name: Generate deployment package
+        run: zip -r deploy.zip . -x '*.git*'
 
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v14
@@ -62,4 +56,12 @@ jobs:
          region: eu-north-1
          #use_existing_version_if_available: t
           # Use the image from the registry or directly if not using a registry
-         deployment_package: deploy-frontend.zip
+
+
+         deployment_package: deploy.zip
+      - name: Archive debug logs
+        if: always() # Ensure this step runs even if previous steps fail
+        uses: actions/upload-artifact@v2
+        with:
+                name: debug-logs
+                path: / # Replace with the actual path to your logs
