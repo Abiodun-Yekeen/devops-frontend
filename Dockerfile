@@ -1,40 +1,72 @@
-
 # Use an official Node.js runtime as the base image
-FROM node:latest 
+FROM node:latest as builder
 
 # Set the working directory in the container
 WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
-COPY  public ./public
- COPY  src ./src
+COPY public ./public
+COPY src ./src
 
 # Install the application dependencies
-#RUN npm install
 RUN npm install
 
 # Build the frontend application
 RUN npm run build
 
-# Copy the frontend source code to the container
-COPY . .
-
-
-
-
 # Use Nginx as the web server
-# FROM nginx
+FROM nginx
 
 # Copy the built files from the previous stage to Nginx
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html
 
 # Expose the port the app runs on (usually 80)
 EXPOSE 80
 
-
 # Default command to start Nginx
 CMD ["nginx", "-g", "daemon off;"]
+
+
+
+
+
+# # Use an official Node.js runtime as the base image
+# FROM node:latest 
+
+# # Set the working directory in the container
+# WORKDIR /app
+
+# # Copy package.json and package-lock.json to the working directory
+# COPY package*.json ./
+# COPY  public ./public
+#  COPY  src ./src
+
+# # Install the application dependencies
+# #RUN npm install
+# RUN npm install
+
+# # Build the frontend application
+# RUN npm run build
+
+# # Copy the frontend source code to the container
+# COPY . .
+
+
+
+
+# # Use Nginx as the web server
+# # FROM nginx
+
+# # Copy the built files from the previous stage to Nginx
+# COPY --from=build /app/build /usr/share/nginx/html
+
+# # Expose the port the app runs on (usually 80)
+# EXPOSE 80
+
+
+# # Default command to start Nginx
+# CMD ["nginx", "-g", "daemon off;"]
 
 
 
