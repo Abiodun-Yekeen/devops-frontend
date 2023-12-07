@@ -7,18 +7,21 @@ WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
+COPY  public ./public
+ COPY  src ./src
 
 # Install the application dependencies
 #RUN npm install
 RUN npm install
+
+# Build the frontend application
+RUN npm run build
 
 # Copy the frontend source code to the container
 COPY . .
 
 
 
-# Build the frontend application
-RUN npm run build
 
 # Use Nginx as the web server
 FROM nginx
