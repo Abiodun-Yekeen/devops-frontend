@@ -21,12 +21,12 @@ jobs:
         with:
           node-version: '14'  # Adjust as needed
       - name: Login to Docker Hub
-        run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u abbeylink --password-stdin
+        run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u abbeylink --password-stdin
 
       - name: Build and push Docker image to Docker Hub
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
           IMAGE_NAME: abbeylink/frontend:1.0
         run: |
           docker build -t $IMAGE_NAME .
