@@ -33,10 +33,10 @@ jobs:
          
           docker push $IMAGE_NAME
 
-      - name: Install dependencies and build
-        run: |
-          npm install
-          npm run build  # Assuming this command generates the build folder
+      # - name: Install dependencies and build
+      #   run: |
+      #     npm install
+      #     npm run build  # Assuming this command generates the build folder
 
       - name: Create deployment package
         run: zip -r deploy.zip ./build  # Pack only the build folder into deploy.zip
@@ -56,8 +56,8 @@ jobs:
         with:
          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-         application_name: frontend
-         environment_name: Frontend-env  
+         application_name: test
+         environment_name: Test-env  
          version_label: "v${{ github.run_number }}"
          region: eu-north-1
          #use_existing_version_if_available: t
