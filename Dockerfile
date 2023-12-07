@@ -3,14 +3,14 @@
 FROM node:14-alpine
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /usr/src/frontend
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
 # Install the application dependencies
 #RUN npm install
-RUN NODE_ENV=development npm i
+RUN npm i
 
 # Copy the frontend source code to the container
 COPY . .
@@ -23,7 +23,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copy the built files from the previous stage to Nginx
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /usr/src/frontend/build /usr/share/nginx/html
 
 # Expose the port the app runs on (usually 80)
 EXPOSE 80
