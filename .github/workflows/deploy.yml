@@ -23,22 +23,16 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-    #   - name: Build and push Docker image to Docker Hub
-    #     uses: docker/build-push-action@v2
-    #     with: 
-    #       context: .
-    #       push: true
-    #       tag: ${{ secrets.DOCKER_USERNAME }}/webapp:${{github.sha}}
+   
 
       - name: Login to Docker Hub
-        run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u abbeylink --password-stdin
+        run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
       - name: Build and push Docker image to Docker Hub
 
         env:
-            DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-            DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
-            IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/webapp:${{github.sha}}
+
+            IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/client:${{github.sha}}
         run: |
             docker build -t $IMAGE_NAME .
             
@@ -53,10 +47,10 @@ jobs:
          username: ${{ secrets.USERNAME }}
          key: ${{ secrets.EC2_SSH_KEY }}
          script: |
-           docker stop webapp || true
-           docker rm webapp || true
-           docker pull ${{ secrets.DOCKER_USERNAME }}/webapp:${{github.sha}}
-           docker run -d --name webapp -p 80:80 ${{ secrets.DOCKER_USERNAME }}/webapp:${{github.sha}}
+           docker stop client || true
+           docker rm client || true
+           docker pull ${{ secrets.DOCKER_USERNAME }}/client:${{github.sha}}
+           docker run -d --name webapp -p 80:80 ${{ secrets.DOCKER_USERNAME }}/client:${{github.sha}}
 
 
       
