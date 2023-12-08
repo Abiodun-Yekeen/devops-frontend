@@ -1,35 +1,3 @@
-FROM node:21.2.0-alpine
-
-WORKDIR /usr/src/client 
-
-COPY  package.json ./
-
-COPY  package-lock.json ./
-
-RUN npm install
-
-COPY . .
-
-RUN npm run build
-
-
-# Use Nginx as the web server
-FROM nginx
-
-# Copy the built files from the previous stage to Nginx
-COPY --from=build /usr/src/client/build /usr/share/nginx/html
-
-# Expose the port the app runs on (usually 80)
-EXPOSE 80
-
-# Default command to start Nginx
-CMD ["nginx", "-g", "daemon off;"]
-
-
-
-
-
-
 # # Use an official Node.js runtime as the base image
 # FROM node:latest AS dependencies
 
@@ -71,6 +39,35 @@ CMD ["nginx", "-g", "daemon off;"]
 
 
 
+FROM node:21.2.0-alpine
+
+ENV NODE_ENV = production
+
+
+WORKDIR /usr/src/backend 
+
+COPY  package.json ./
+
+COPY  package-lock.json ./
+
+
+RUN npm install
+
+COPY . .
+
+
+ RUN npm run build
+
+FROM nginx
+
+# Copy the built files from the previous stage to Nginx
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Expose the port the app runs on (usually 80)
+EXPOSE 80
+
+# Default command to start Nginx
+CMD ["nginx", "-g", "daemon off;"]
 
 
 
