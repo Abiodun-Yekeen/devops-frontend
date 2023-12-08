@@ -34,7 +34,7 @@ jobs:
 
             IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/client:${{github.sha}}
         run: |
-            docker build -t $IMAGE_NAME .
+            sudo docker build -t $IMAGE_NAME .
             
             docker push $IMAGE_NAME
 
