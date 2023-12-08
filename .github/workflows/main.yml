@@ -1,42 +1,42 @@
-name: Frontend CI/CD
+# name: Frontend CI/CD
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  build-and-deploy-frontend:
-    runs-on: ubuntu-latest
+# jobs:
+#   build-and-deploy-frontend:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v2
 
-      - name: Clean npm cache
-        run: npm cache clean --force
+#       - name: Clean npm cache
+#         run: npm cache clean --force
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'  # Adjust as needed
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: '14'  # Adjust as needed
 
     
 
      
-      - name: Generate deployment package
-        run: zip -r deploy.zip . -x '*.git*'
+#       - name: Generate deployment package
+#         run: zip -r deploy.zip . -x '*.git*'
 
-      - name: Deploy to Elastic Beanstalk
-        uses: einaregilsson/beanstalk-deploy@v14
-        with:
-         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-         application_name: frontend
-         environment_name: Frontend-env  
-         version_label: "v${{ github.run_number }}"
-         region: eu-north-1
-         #use_existing_version_if_available: t
-          # Use the image from the registry or directly if not using a registry
-         deployment_package: deploy.zip
+#       - name: Deploy to Elastic Beanstalk
+#         uses: einaregilsson/beanstalk-deploy@v14
+#         with:
+#          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#          application_name: frontend
+#          environment_name: Frontend-env  
+#          version_label: "v${{ github.run_number }}"
+#          region: eu-north-1
+#          #use_existing_version_if_available: t
+#           # Use the image from the registry or directly if not using a registry
+#          deployment_package: deploy.zip
       
