@@ -1,27 +1,28 @@
 {
     "name": "frontend",
     "version": "0.1.0",
-    "proxy": "http://127.0.0.1:8080/",
+    "proxy": "http://backend:8080/",
     "private": true,
     "dependencies": {
         "@ckeditor/ckeditor5-build-classic": "^32.0.0",
         "@ckeditor/ckeditor5-react": "^4.0.0",
-        "@sideway/address": "^5.0.0",
         "@testing-library/jest-dom": "^5.16.1",
         "@testing-library/react": "^12.1.2",
         "@testing-library/user-event": "^13.5.0",
-        "axios": "^1.6.2",
+        "axios": "^0.25.0",
+        "jsonwebtoken": "^9.0.2",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-icons": "^4.3.1",
         "react-router-dom": "^6.2.1",
-        "react-scripts": "^3.0.1",
+        "react-scripts": "5.0.0",
         "uuid": "^8.3.2",
         "web-vitals": "^2.1.4"
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts build",
+         "build": "react-scripts build",
+        "build:frontend": "npm run build --workspace frontend",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
@@ -42,9 +43,5 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
-    },
-    "main": "index.js",
-    "repository": "https://github.com/Abiodun-Yekeen/devops-frontend.git",
-    "author": "Yekeen Abiodun <abiodunyekeen76@gmail.com>",
-    "license": "MIT"
+    }
 }
