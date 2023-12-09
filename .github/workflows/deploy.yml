@@ -26,7 +26,7 @@
                    env:
                      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
                      DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
-                     IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/client:${{github.sha}}
+                     IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/client:${{github.run_number}}
                    run: |
                      docker build -t $IMAGE_NAME .
                      docker push $IMAGE_NAME
@@ -41,7 +41,7 @@
                        docker stop client || true
                        docker rm client || true
                        docker pull ${{ secrets.DOCKER_USERNAME }}/client:${{github.sha}}
-                       docker run -d --name client -p 80:80 ${{ secrets.DOCKER_USERNAME }}/client:${{github.sha}}
+                       docker run -d --name client -p 80:80 ${{ secrets.DOCKER_USERNAME }}/client:${{github.run_number}}
            
 
 
