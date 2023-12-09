@@ -42,5 +42,9 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
-    }
+    },
+    "main": "index.js",
+    "repository": "https://github.com/Abiodun-Yekeen/devops-frontend.git",
+    "author": "Yekeen Abiodun <abiodunyekeen76@gmail.com>",
+    "license": "MIT"
 }
