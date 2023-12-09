@@ -1,9 +1,10 @@
 FROM node:14 AS build
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm install
+COPY build ./
+# RUN npm install
 COPY . .
-RUN npm run build
+# RUN npm run build
 
 # Stage 2: Serve the app using Nginx
 FROM nginx:alpine
