@@ -1,6 +1,9 @@
 FROM node:14 AS build
 WORKDIR /app
 COPY package.json package-lock.json ./
+
+RUN yarn upgrade
+
 RUN npm install
 COPY . .
 RUN npm run build
