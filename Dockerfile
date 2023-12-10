@@ -1,37 +1,3 @@
-# FROM node:21.2.0-alpine
-
-# WORKDIR /usr/src/frontend
-
-# COPY  package.json ./
-
-# COPY  package-lock.json ./
-
-# COPY  public ./public
-# COPY  src ./src
-
-
-# # COPY ./frontend/package.json ./
-# # COPY ./frontend/package-lock.json ./
-# # COPY ./frontend/public ./public
-# # COPY ./frontend/src ./src
-
-# RUN npm install
-# #RUN npm run build
-
-
-
-# # RUN npm install
-
-# COPY . .
-
-
-# # RUN npm run build
-
-#  EXPOSE 8085
-
-
-
-# CMD [ "npm", "start" ]
 
 
 FROM node:14 AS build
