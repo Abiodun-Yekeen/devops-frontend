@@ -30,10 +30,6 @@
                    run: |
                      docker build -t $IMAGE_NAME .
                      docker push $IMAGE_NAME
-
-                 - name: Use the SSH key
-                   run: |
-                         echo ${{ secrets.EC2_SSH_KEY }}
            
                  - name: Deploy to EC2 instance
                    uses: appleboy/ssh-action@master
