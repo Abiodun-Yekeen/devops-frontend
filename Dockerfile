@@ -1,18 +1,54 @@
-FROM node:14 AS build
-WORKDIR /app
-COPY package.json package-lock.json ./
-COPY build ./
+FROM node:21.2.0-alpine
+
+WORKDIR /usr/src/frontend
+
+COPY  package.json ./
+
+COPY  package-lock.json ./
+
+COPY  public ./public
+COPY  src ./src
+
+
+# COPY ./frontend/package.json ./
+# COPY ./frontend/package-lock.json ./
+# COPY ./frontend/public ./public
+# COPY ./frontend/src ./src
+
+RUN npm install
+#RUN npm run build
+
+
+
 # RUN npm install
+
 COPY . .
+
+
 # RUN npm run build
 
-# Stage 2: Serve the app using Nginx
-FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
-# Optionally, copy custom Nginx configuration
-COPY ./default.conf /etc/nginx/conf.d/
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+ EXPOSE 8085
+
+
+
+CMD [ "npm", "start" ]
+
+
+# FROM node:14 AS build
+# WORKDIR /app
+# COPY package.json package-lock.json ./
+# COPY build ./
+# # RUN npm install
+# COPY . .
+# # RUN npm run build
+
+# # Stage 2: Serve the app using Nginx
+# FROM nginx:alpine
+# COPY --from=build /app/build /usr/share/nginx/html
+# # Optionally, copy custom Nginx configuration
+# COPY ./default.conf /etc/nginx/conf.d/
+# EXPOSE 80
+# CMD ["nginx", "-g", "daemon off;"]
 
 
 
