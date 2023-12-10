@@ -20,9 +20,6 @@ CMD ["nginx", "-g", "daemon off;"]
 
 
 
-
-
-
 # # Use an official Node.js runtime as the base image
 # FROM node:latest as builder
 
