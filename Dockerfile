@@ -3,14 +3,14 @@
 FROM node:latest AS build
 WORKDIR /app
 COPY package.json package-lock.json ./
-#COPY build ./
- RUN npm install
+COPY build ./
+# RUN npm install
 COPY . .
- RUN npm run build
+# RUN npm run build
 
 # Stage 2: Serve the app using Nginx
-FROM nginx:alpine
-COPY --from=builder /app/build /usr/share/nginx/html
+FROM nginx:latest
+COPY --from=build /app/build /usr/share/nginx/html
 # Optionally, copy custom Nginx configuration
 #  COPY ./default.conf /etc/nginx/conf.d/
 EXPOSE 8085
