@@ -1,20 +1,23 @@
 
 
-# FROM node:latest AS build
-# WORKDIR /app
-# COPY package.json package-lock.json ./
+FROM node:latest AS build
+WORKDIR /app
+COPY package.json package-lock.json ./
 # COPY build ./
-# # RUN npm install
-# COPY . .
-# # RUN npm run build
 
-# # Stage 2: Serve the app using Nginx
-# FROM nginx:latest
-# COPY --from=build /app/build /usr/share/nginx/html
-# # Optionally, copy custom Nginx configuration
-# #  COPY ./default.conf /etc/nginx/conf.d/
-# EXPOSE 80
-# CMD ["nginx", "-g", "daemon off;"]
+RUN npm install
+
+COPY . .
+
+ RUN npm run build
+
+# Stage 2: Serve the app using Nginx
+FROM nginx:latest
+COPY --from=build /app/build /usr/share/nginx/html
+# Optionally, copy custom Nginx configuration
+#  COPY ./default.conf /etc/nginx/conf.d/
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
 
 
 
@@ -100,34 +103,34 @@
 
 
 
-FROM node:14
+# FROM node:14
 
-WORKDIR /usr/src/app
+# WORKDIR /usr/src/app
 
-COPY  package.json ./
+# COPY  package.json ./
 
-COPY  package-lock.json ./
+# COPY  package-lock.json ./
 
-# COPY  public ./public
-# COPY  src ./src
-
-
-# COPY ./frontend/package.json ./
-# COPY ./frontend/package-lock.json ./
-# COPY ./frontend/public ./public
-# COPY ./frontend/src ./src
-
-RUN npm i
-
-# RUN npm install
-
-COPY . .
+# # COPY  public ./public
+# # COPY  src ./src
 
 
-#  RUN npm run build
+# # COPY ./frontend/package.json ./
+# # COPY ./frontend/package-lock.json ./
+# # COPY ./frontend/public ./public
+# # COPY ./frontend/src ./src
 
- EXPOSE 80
+# RUN npm i
+
+# # RUN npm install
+
+# COPY . .
+
+
+# #  RUN npm run build
+
+#  EXPOSE 80
 
 
 
-CMD [ "npm", "start" ]
+# CMD [ "npm", "start" ]
