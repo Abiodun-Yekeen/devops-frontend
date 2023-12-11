@@ -78,7 +78,7 @@ const Header = () => {
 
               <Link className="register-link" to="/register">
                 {" "}
-                Start Now
+                Start Now ghghghghg
               </Link>
             </div>
           )}
