@@ -1,20 +1,20 @@
 
 
-FROM node:latest AS build
-WORKDIR /app
-COPY package.json package-lock.json ./
-COPY build ./
-# RUN npm install
-COPY . .
-# RUN npm run build
+# FROM node:latest AS build
+# WORKDIR /app
+# COPY package.json package-lock.json ./
+# COPY build ./
+# # RUN npm install
+# COPY . .
+# # RUN npm run build
 
-# Stage 2: Serve the app using Nginx
-FROM nginx:latest
-COPY --from=build /app/build /usr/share/nginx/html
-# Optionally, copy custom Nginx configuration
-#  COPY ./default.conf /etc/nginx/conf.d/
-EXPOSE 8085
-CMD ["nginx", "-g", "daemon off;"]
+# # Stage 2: Serve the app using Nginx
+# FROM nginx:latest
+# COPY --from=build /app/build /usr/share/nginx/html
+# # Optionally, copy custom Nginx configuration
+# #  COPY ./default.conf /etc/nginx/conf.d/
+# EXPOSE 80
+# CMD ["nginx", "-g", "daemon off;"]
 
 
 
@@ -100,41 +100,34 @@ CMD ["nginx", "-g", "daemon off;"]
 
 
 
-# FROM node:21.2.0-alpine
+FROM node:14
 
-# ENV NODE_ENV = production
+WORKDIR /usr/src/app
 
+COPY  package.json ./
 
+COPY  package-lock.json ./
 
-# WORKDIR /usr/src/frontend
-
-# COPY  package.json ./
-
-# COPY  package-lock.json ./
-
-# # COPY  public ./public
-# # COPY  src ./src
+# COPY  public ./public
+# COPY  src ./src
 
 
-# # COPY ./frontend/package.json ./
-# # COPY ./frontend/package-lock.json ./
-# # COPY ./frontend/public ./public
-# # COPY ./frontend/src ./src
+# COPY ./frontend/package.json ./
+# COPY ./frontend/package-lock.json ./
+# COPY ./frontend/public ./public
+# COPY ./frontend/src ./src
+
+RUN npm i
 
 # RUN npm install
-# RUN npm run build
+
+COPY . .
+
+
+#  RUN npm run build
+
+ EXPOSE 80
 
 
 
-# # RUN npm install
-
-# COPY . .
-
-
-# # RUN npm run build
-
-#  EXPOSE 8080
-
-
-
-# CMD [ "npm", "start" ]
+CMD [ "npm", "start" ]
