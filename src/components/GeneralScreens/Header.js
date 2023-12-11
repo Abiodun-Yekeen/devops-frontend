@@ -32,7 +32,7 @@ const Header = () => {
     <header>
       <div className="averager">
         <Link to="/" className="logo">
-          <h5>BLOGIVERSAL</h5>
+          <h5>BLOGIVERSAL for real</h5>
         </Link>
         <SearchForm />
         <div className="header_options">
@@ -64,7 +64,7 @@ const Header = () => {
 
                   <button className="logout-btn" onClick={handleLogout}>
                     {" "}
-                    <BiLogOut /> Logout
+                    <BiLogOut /> Signout
                   </button>
                 </div>
               </div>
