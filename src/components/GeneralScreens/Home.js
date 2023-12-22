@@ -25,7 +25,7 @@ const Home = () => {
       setLoading(true)
       try {
 
-        const { data } = await axios.get(`/story/getAllStories?search=${searchKey || ""}&page=${page}`)
+        const { data } = await axios.get(`/api/story/getAllStories?search=${searchKey || ""}&page=${page}`)
 
         if (searchKey) {
           navigate({
@@ -58,8 +58,9 @@ const Home = () => {
     setPage(1)
   }, [searchKey])
 
-
+  console.log(stories);
   return (
+   
     <div className="Inclusive-home-page">
       {loading ?
 
@@ -76,13 +77,15 @@ const Home = () => {
         :
         <div>
           <div className="story-card-wrapper">
-            {stories?.length !== 0 ? 
-              stories.map((story) => {
-                return (
-                  <CardStory key={uuidv4()} story={story} />
-                )
-              }) : <NoStories />
-            }
+           
+          {stories.length !== 0 ? (
+            stories.map((story) => {
+              return <CardStory key={uuidv4()} story={story} />;
+            })
+          ) : (
+            <NoStories />
+          )}
+            
             <img className="bg-planet-svg" src="planet.svg" alt="planet" />
             <img className="bg-planet2-svg" src="planet2.svg" alt="planet" />
             <img className="bg-planet3-svg" src="planet3.svg" alt="planet" />
@@ -100,6 +103,8 @@ const Home = () => {
     </div>
 
   )
+
+  
 
 };
 

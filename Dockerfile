@@ -1,5 +1,74 @@
 
 
+
+
+# FROM node:14
+
+# WORKDIR /usr/src/app
+
+# COPY  package.json ./
+
+# COPY  package-lock.json ./
+
+# # COPY  public ./public
+# # COPY  src ./src
+
+
+# # COPY ./frontend/package.json ./
+# # COPY ./frontend/package-lock.json ./
+# # COPY ./frontend/public ./public
+# # COPY ./frontend/src ./src
+
+# RUN npm i
+
+# # RUN npm install
+
+# COPY . .
+
+
+# #  RUN npm run build
+
+#  EXPOSE 80
+
+
+
+# CMD [ "npm", "start" ]
+
+
+
+# FROM node:14
+
+# WORKDIR /usr/src/app
+
+# COPY  package.json ./
+
+# COPY  package-lock.json ./
+
+# # COPY  public ./public
+# # COPY  src ./src
+
+
+# # COPY ./frontend/package.json ./
+# # COPY ./frontend/package-lock.json ./
+# # COPY ./frontend/public ./public
+# # COPY ./frontend/src ./src
+
+# RUN npm i
+
+# # RUN npm install
+
+# COPY . .
+
+
+# #  RUN npm run build
+
+#  EXPOSE 80
+
+
+
+
+
+
 FROM node:14 AS build
 WORKDIR /app
 COPY package.json package-lock.json ./
