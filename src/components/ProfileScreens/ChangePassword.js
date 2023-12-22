@@ -30,7 +30,7 @@ const ChangePassword = () => {
 
         try {
             const { data } = await axios.put(
-                "/user/changePassword",
+                "/api/user/changePassword",
                 {
                     newPassword,
                     oldPassword
