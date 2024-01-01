@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../../Css/ChangePassword.css'
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
+import axiosInstance from '../../axiosInstance';
 
 const ChangePassword = () => {
 
@@ -29,7 +30,7 @@ const ChangePassword = () => {
         }
 
         try {
-            const { data } = await axios.put(
+            const { data } = await axiosInstance.put(
                 "/user/changePassword",
                 {
                     newPassword,
