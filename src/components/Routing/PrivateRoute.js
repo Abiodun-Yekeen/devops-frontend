@@ -21,14 +21,14 @@ const PrivateRoute =( ) => {
             },
         };
         try {
-            const { data } = await axios.get("/auth/private", config); 
+            const { data } = await axios.get("/api/auth/private", config); 
 
             setAuth(true)
             setActiveUser(data.user)
             setConfig(config)
 
         } 
-        
+
         catch (error) {
 
             localStorage.removeItem("authToken");
