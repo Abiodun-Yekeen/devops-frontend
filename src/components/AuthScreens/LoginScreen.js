@@ -14,9 +14,11 @@ const LoginScreen = () => {
 
     try {
       const { data } = await axios.post(
-        "/api/auth/login",
+        "/auth/login",
         { email, password }
+       
       );
+       console.log(data)
       localStorage.setItem("authToken", data.token);
 
       setTimeout(() => {
@@ -45,7 +47,7 @@ const LoginScreen = () => {
           <div className="top-suggest_register">
 
             <span>Don't have an account? </span>
-            <a href="/register">Register</a>
+            <a href="/register">Sign Up</a>
 
           </div>
 

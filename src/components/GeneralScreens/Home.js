@@ -58,9 +58,8 @@ const Home = () => {
     setPage(1)
   }, [searchKey])
 
-  console.log(stories);
+
   return (
-   
     <div className="Inclusive-home-page">
       {loading ?
 
@@ -77,22 +76,18 @@ const Home = () => {
         :
         <div>
           <div className="story-card-wrapper">
-           
-          {stories.length !== 0 ? (
-            stories.map((story) => {
-              return <CardStory key={uuidv4()} story={story} />;
-            })
-          ) : (
-            <NoStories />
-          )}
-            
+            {stories.length !== 0 ?
+              stories.map((story) => {
+                return (
+                  <CardStory key={uuidv4()} story={story} />
+                )
+              }) : <NoStories />
+            }
             <img className="bg-planet-svg" src="planet.svg" alt="planet" />
             <img className="bg-planet2-svg" src="planet2.svg" alt="planet" />
             <img className="bg-planet3-svg" src="planet3.svg" alt="planet" />
 
           </div>
-
-
 
           <Pagination page={page} pages={pages} changePage={setPage} />
 
@@ -103,8 +98,6 @@ const Home = () => {
     </div>
 
   )
-
-  
 
 };
 

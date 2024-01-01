@@ -32,7 +32,7 @@ const Header = () => {
     <header>
       <div className="averager">
         <Link to="/" className="logo">
-          <h5>BLOGIVERSAL</h5>
+          <h5>DevOps</h5>
         </Link>
         <SearchForm />
         <div className="header_options">
@@ -64,7 +64,7 @@ const Header = () => {
 
                   <button className="logout-btn" onClick={handleLogout}>
                     {" "}
-                    <BiLogOut /> Signout
+                    <BiLogOut /> Logout
                   </button>
                 </div>
               </div>
@@ -78,7 +78,7 @@ const Header = () => {
 
               <Link className="register-link" to="/register">
                 {" "}
-                Start Now 
+                Get Started
               </Link>
             </div>
           )}
