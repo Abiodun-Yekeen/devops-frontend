@@ -28,6 +28,7 @@ const PrivateRoute =( ) => {
             setConfig(config)
 
         } 
+        
         catch (error) {
 
             localStorage.removeItem("authToken");
