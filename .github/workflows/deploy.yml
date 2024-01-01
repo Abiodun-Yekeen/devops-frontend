@@ -38,8 +38,9 @@
                      username: ${{ secrets.USERNAME }}
                      key: ${{ secrets.EC2_SSH_KEY }}
                      script: |
-                       docker stop client || true
-                       docker rm client || true
+                      #  docker stop client || true
+                      #  docker rm client || true
+                       docker rmi -f $(docker images -q)
                        docker pull ${{ secrets.DOCKER_USERNAME }}/client:${{github.sha}}
                        docker run -d --name client -p 80:80 ${{ secrets.DOCKER_USERNAME }}/client:${{github.run_number}}
            
