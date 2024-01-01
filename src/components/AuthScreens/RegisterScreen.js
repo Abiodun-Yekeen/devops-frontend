@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../Css/Register.css"
+import axiosInstance from "../../axiosInstance";
 const RegisterScreen = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -23,8 +24,8 @@ const RegisterScreen = () => {
     }
 
     try {
-      const { data } = await axios.post(
-        "/api/auth/register",
+      const { data } = await axiosInstance.post(
+        "/auth/register",
         {
           username,
           email,

@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import "../../Css/Login.css"
 import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "../../axiosInstance";
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,8 +14,8 @@ const LoginScreen = () => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post(
-        "/api/auth/login",
+      const { data } = await axiosInstance.post(
+        "/auth/login",
         { email, password }
        
       );
