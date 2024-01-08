@@ -1,4 +1,4 @@
-
+# Dockerfile for frontend
 
 FROM node:14 AS build
 WORKDIR /app
